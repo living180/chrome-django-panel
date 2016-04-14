@@ -10,5 +10,13 @@
     "128": "extension-icon.png"
   },
 
+  "permissions": [
+    "<all_urls>", "webRequest", "webRequestBlocking"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
   "devtools_page": "devtools.html"
 }
