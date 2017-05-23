@@ -12,20 +12,24 @@ html, body {
   font-size: 11px;
 }
 
-html {
-  display: table;
+#wrapper {
+  display: flex;
+  height: 100vh;
 }
 
-body {
-  display: table-row;
+#buttons {
+  border-bottom: 1px solid #ccc;
+  padding: 5px;
+  text-align: center;
 }
 
-#request-list {
-  height: 100%;
-  float:left;
-  overflow: auto;
+aside {
   border-right: 1px solid #ccc;
-  display: table-cell;
+  overflow-y: scroll;
+}
+
+article {
+  flex: 1;
 }
 
 #debug-toolbar-panel {
@@ -34,8 +38,8 @@ body {
   border: none;
 }
 
-
 .iframe-wrapper {
+  background: #FF0;
   display: table-cell;
   width: 100%;
 }
