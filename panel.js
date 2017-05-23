@@ -11,7 +11,7 @@ $(function() {
     }
 
     function resizeLeftPanel(width) {
-        $('#request-list').width(width);
+        $('#sidebar').width(width);
         $('.split-view-resizer').css('left', width);
     }
 
@@ -33,6 +33,10 @@ $(function() {
     $('.split-view-resizer').on('mousedown', function() {
         $(document).on('mousemove', resizerDragMove);
         $(document).on('mouseup', resizerDragEnd);
+    });
+
+    $('#clear-requests').on('click', function() {
+        $("#request-list").empty();
     });
 });
 

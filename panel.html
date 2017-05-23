@@ -8,10 +8,19 @@
   </head>
 
   <body>
-    <div id="request-list"></div>
-    <div class="split-view-resizer"></div>
-    <div class="iframe-wrapper">
-      <iframe id="debug-toolbar-panel"></iframe>
+    <div id="wrapper">
+      <aside id="sidebar">
+        <div id="buttons">
+          <button id="clear-requests">Clear</button>
+        </div>
+        <div id="request-list"></div>
+      </aside>
+
+      <div class="split-view-resizer"></div>
+
+      <article id="iframe-wrapper">
+        <iframe frameborder="0" id="debug-toolbar-panel"></iframe>
+      </article>
     </div>
   </body>
 </html>
