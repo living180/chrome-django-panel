@@ -6,6 +6,12 @@
 
   "description": "Django Debug Toolbar inside WebKit DevTools. Works fine with background AJAX requests and non-HTML responses.",
 
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "django-panel-webext@living180.net"
+    }
+  },
+
   "icons": {
     "128": "extension-icon.png"
   },
