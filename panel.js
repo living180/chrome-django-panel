@@ -41,15 +41,22 @@ function buildRequestEl(requestUrl, debugDataUrl) {
     var url = new URL(requestUrl);
     var path = url.pathname + url.search;
 
-    return $('<div class="request"></div>')
-        .text(path)
-        .attr('title', requestURL)
-        .on('click', function() {
-            $('.selected').removeClass('selected');
-            $(this).addClass('selected');
-
-            $('#debug-toolbar-panel').attr('src', debugDataUrl);
-        });
+    var el = document.createElement('div');
+    el.classList.add('request');
+    el.setAttribute('title', requestUrl);
+    el.appendChild(document.createTextNode(path));
+    el.addEventListener('click', function(e) {
+        var selected = document.querySelector('.selected');
+        if (selected !== this) {
+            if (selected) {
+                selected.classList.remove('selected');
+            }
+            this.classList.add('selected');
+            document.getElementById('debug-toolbar-panel')
+                .setAttribute('src', debugDataUrl);
+        }
+    });
+    return el;
 }
 
 chrome.devtools.network.onRequestFinished.addListener(function(entry) {
