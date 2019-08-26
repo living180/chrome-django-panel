@@ -34,6 +34,9 @@ body {
   border: none;
 }
 
+#debug-toolbar-panel.blocked {
+  pointer-events: none;
+}
 
 .iframe-wrapper {
   display: table-cell;

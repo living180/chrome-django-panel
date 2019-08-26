@@ -10,6 +10,8 @@ $(function() {
         localStorage = {};
     }
 
+    var debugToolbarPanel = document.getElementById('debug-toolbar-panel');
+
     function resizeLeftPanel(width) {
         $('#request-list').width(width);
         $('.split-view-resizer').css('left', width);
@@ -26,9 +28,11 @@ $(function() {
 
         $(document).off('mousemove', resizerDragMove);
         $(document).off('mouseup', resizerDragEnd);
+        debugToolbarPanel.classList.remove('blocked');
     }
 
     $('.split-view-resizer').on('mousedown', function() {
+        debugToolbarPanel.classList.add('blocked');
         $(document).on('mousemove', resizerDragMove);
         $(document).on('mouseup', resizerDragEnd);
     });
@@ -48,8 +52,7 @@ $(function() {
                     selected.classList.remove('selected');
                 }
                 this.classList.add('selected');
-                document.getElementById('debug-toolbar-panel')
-                    .setAttribute('src', debugDataUrl);
+                debugToolbarPanel.setAttribute('src', debugDataUrl);
             }
         });
         return el;
