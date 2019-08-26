@@ -34,37 +34,37 @@ $(function() {
         $(document).on('mousemove', resizerDragMove);
         $(document).on('mouseup', resizerDragEnd);
     });
-});
 
+    function buildRequestEl(requestUrl, debugDataUrl) {
+        var url = new URL(requestUrl);
+        var path = url.pathname + url.search;
 
-function buildRequestEl(requestUrl, debugDataUrl) {
-    var url = new URL(requestUrl);
-    var path = url.pathname + url.search;
-
-    var el = document.createElement('div');
-    el.classList.add('request');
-    el.setAttribute('title', requestUrl);
-    el.appendChild(document.createTextNode(path));
-    el.addEventListener('click', function(e) {
-        var selected = document.querySelector('.selected');
-        if (selected !== this) {
-            if (selected) {
-                selected.classList.remove('selected');
+        var el = document.createElement('div');
+        el.classList.add('request');
+        el.setAttribute('title', requestUrl);
+        el.appendChild(document.createTextNode(path));
+        el.addEventListener('click', function(e) {
+            var selected = document.querySelector('.selected');
+            if (selected !== this) {
+                if (selected) {
+                    selected.classList.remove('selected');
+                }
+                this.classList.add('selected');
+                document.getElementById('debug-toolbar-panel')
+                    .setAttribute('src', debugDataUrl);
             }
-            this.classList.add('selected');
-            document.getElementById('debug-toolbar-panel')
-                .setAttribute('src', debugDataUrl);
+        });
+        return el;
+    }
+
+    chrome.devtools.network.onRequestFinished.addListener(function(entry) {
+        for (const header of entry.response.headers) {
+            if (header.name.toLowerCase() === 'x-debug-data-url') {
+                document.getElementById('request-list').appendChild(
+                    buildRequestEl(entry.request.url, header.value)
+                );
+                break;
+            }
         }
     });
-    return el;
-}
-
-chrome.devtools.network.onRequestFinished.addListener(function(entry) {
-    for (const header of entry.response.headers) {
-        if (header.name.toLowerCase() === 'x-debug-data-url') {
-            document.getElementById('request-list')
-                .appendChild(buildRequestEl(entry.request.url, header.value));
-            break;
-        }
-    }
 });
