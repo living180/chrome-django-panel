@@ -38,16 +38,12 @@ $(function() {
 
 
 function buildRequestEl(requestUrl, debugDataUrl) {
-    var url = decodeURIComponent(requestUrl),
-        anchor = document.createElement('a'),
-        path;
-
-    anchor.href = url;
-    path = decodeURIComponent(anchor.pathname + anchor.search);
+    var url = new URL(requestUrl);
+    var path = url.pathname + url.search;
 
     return $('<div class="request"></div>')
         .text(path)
-        .attr('title', url)
+        .attr('title', requestURL)
         .on('click', function() {
             $('.selected').removeClass('selected');
             $(this).addClass('selected');
