@@ -5,7 +5,6 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
     function setRequestListWidth(width) {
         requestList.style.width = width;
-        resizer.style.left = width;
     }
 
     chrome.storage.local.get({requestListWidth: "300px"}, function(result) {

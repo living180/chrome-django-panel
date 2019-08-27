@@ -7,38 +7,36 @@
 html, body {
   width: 100%;
   height: 100%;
+}
+
+#wrapper {
+  height: 100%;
+  display: flex;
   overflow: hidden;
 }
 
-html {
-  display: table;
-}
-
-body {
-  display: table-row;
-}
-
 #request-list {
-  height: 100%;
-  float:left;
+  flex: 0 0 auto;
   overflow: auto;
-  border-right: 1px solid #ccc;
-  display: table-cell;
+}
+
+#resizer {
+  flex: 0 0 auto;
+  content: '';
+  display: block;
+  height: 100%;
+  width: 3px;
+  background: #ccc;
+  cursor: ew-resize;
 }
 
 #debug-toolbar-panel {
-  width: 100%;
-  height: 100%;
+  flex: 1 1 auto;
   border: none;
 }
 
 #debug-toolbar-panel.blocked {
   pointer-events: none;
-}
-
-.iframe-wrapper {
-  display: table-cell;
-  width: 100%;
 }
 
 .request {
@@ -66,14 +64,4 @@ body {
 .request.selected {
   font-weight: bold;
   background: #d0dffa;
-}
-
-#resizer {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 5px;
-  z-index: 1500;
-  cursor: ew-resize;
-  margin-left: -2.5px;
 }
