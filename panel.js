@@ -1,4 +1,4 @@
-$(function() {
+window.addEventListener('DOMContentLoaded', function(e) {
     var requestList = document.getElementById('request-list');
     var resizer = document.getElementById('resizer');
     var debugToolbarPanel = document.getElementById('debug-toolbar-panel');
@@ -21,15 +21,15 @@ $(function() {
             "requestListWidth": requestList.style.width
         });
 
-        $(document).off('mousemove', resizerDragMove);
-        $(document).off('mouseup', resizerDragEnd);
+        document.removeEventListener('mousemove', resizerDragMove);
+        document.removeEventListener('mouseup', resizerDragEnd);
         debugToolbarPanel.classList.remove('blocked');
     }
 
     resizer.addEventListener('mousedown', function() {
         debugToolbarPanel.classList.add('blocked');
-        $(document).on('mousemove', resizerDragMove);
-        $(document).on('mouseup', resizerDragEnd);
+        document.addEventListener('mousemove', resizerDragMove);
+        document.addEventListener('mouseup', resizerDragEnd);
     });
 
     function buildRequestEl(requestUrl, debugDataUrl) {
