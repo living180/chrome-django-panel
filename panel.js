@@ -23,7 +23,6 @@ $(function() {
     }
 
     function resizerDragEnd(event) {
-        resizeLeftPanel(event.pageX);
         localStorage.sidePanelWidth = event.pageX + 'px';
 
         $(document).off('mousemove', resizerDragMove);
