@@ -1,15 +1,4 @@
 $(function() {
-    var localStorage;
-    // The "Block sites from setting any data" option prevents the extension
-    // from accessing the localStorage. Any attempt to access window.localStorage
-    // will raise a security exception.
-    try {
-        localStorage = window.localStorage;
-    }
-    catch (e) {
-        localStorage = {};
-    }
-
     var requestList = document.getElementById('request-list');
     var debugToolbarPanel = document.getElementById('debug-toolbar-panel');
 
@@ -18,14 +7,18 @@ $(function() {
         $('.split-view-resizer').css('left', width);
     }
 
-    resizeLeftPanel(localStorage.sidePanelWidth || 200);
+    chrome.storage.local.get({requestListWidth: "300px"}, function(result) {
+        resizeLeftPanel(result.requestListWidth);
+    });
 
     function resizerDragMove(event) {
         resizeLeftPanel(event.pageX + 'px');
     }
 
     function resizerDragEnd(event) {
-        localStorage.sidePanelWidth = event.pageX + 'px';
+        chrome.storage.local.set({
+            "requestListWidth": requestList.style.width
+        });
 
         $(document).off('mousemove', resizerDragMove);
         $(document).off('mouseup', resizerDragEnd);
