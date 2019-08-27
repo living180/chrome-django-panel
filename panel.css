@@ -67,7 +67,7 @@ body {
   background: #d0dffa;
 }
 
-.split-view-resizer {
+#resizer {
   position: absolute;
   top: 0;
   bottom: 0;

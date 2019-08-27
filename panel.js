@@ -4,7 +4,7 @@ $(function() {
 
     function setRequestListWidth(width) {
         requestList.style.width = width;
-        $('.split-view-resizer').css('left', width);
+        $('#resizer').css('left', width);
     }
 
     chrome.storage.local.get({requestListWidth: "300px"}, function(result) {
@@ -25,7 +25,7 @@ $(function() {
         debugToolbarPanel.classList.remove('blocked');
     }
 
-    $('.split-view-resizer').on('mousedown', function() {
+    $('#resizer').on('mousedown', function() {
         debugToolbarPanel.classList.add('blocked');
         $(document).on('mousemove', resizerDragMove);
         $(document).on('mouseup', resizerDragEnd);
