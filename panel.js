@@ -4,20 +4,20 @@ window.addEventListener('DOMContentLoaded', function(e) {
     var debugToolbarPanel = document.getElementById('debug-toolbar-panel');
 
     function setRequestListWidth(width) {
-        requestList.style.width = width;
+        requestList.style.width = Math.max(60, width) + "px";
     }
 
-    chrome.storage.local.get({requestListWidth: "300px"}, function(result) {
+    chrome.storage.local.get({requestListWidth: 300}, function(result) {
         setRequestListWidth(result.requestListWidth);
     });
 
     function resizerDragMove(event) {
-        setRequestListWidth(event.pageX + 'px');
+        setRequestListWidth(event.pageX);
     }
 
     function resizerDragEnd(event) {
         chrome.storage.local.set({
-            "requestListWidth": requestList.style.width
+            "requestListWidth": parseInt(requestList.style.width)
         });
 
         document.removeEventListener('mousemove', resizerDragMove);
