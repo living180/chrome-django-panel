@@ -2,17 +2,17 @@ $(function() {
     var requestList = document.getElementById('request-list');
     var debugToolbarPanel = document.getElementById('debug-toolbar-panel');
 
-    function resizeLeftPanel(width) {
+    function setRequestListWidth(width) {
         requestList.style.width = width;
         $('.split-view-resizer').css('left', width);
     }
 
     chrome.storage.local.get({requestListWidth: "300px"}, function(result) {
-        resizeLeftPanel(result.requestListWidth);
+        setRequestListWidth(result.requestListWidth);
     });
 
     function resizerDragMove(event) {
-        resizeLeftPanel(event.pageX + 'px');
+        setRequestListWidth(event.pageX + 'px');
     }
 
     function resizerDragEnd(event) {
