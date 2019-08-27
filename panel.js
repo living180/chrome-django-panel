@@ -1,10 +1,11 @@
 $(function() {
     var requestList = document.getElementById('request-list');
+    var resizer = document.getElementById('resizer');
     var debugToolbarPanel = document.getElementById('debug-toolbar-panel');
 
     function setRequestListWidth(width) {
         requestList.style.width = width;
-        $('#resizer').css('left', width);
+        resizer.style.left = width;
     }
 
     chrome.storage.local.get({requestListWidth: "300px"}, function(result) {
@@ -25,7 +26,7 @@ $(function() {
         debugToolbarPanel.classList.remove('blocked');
     }
 
-    $('#resizer').on('mousedown', function() {
+    resizer.addEventListener('mousedown', function() {
         debugToolbarPanel.classList.add('blocked');
         $(document).on('mousemove', resizerDragMove);
         $(document).on('mouseup', resizerDragEnd);
