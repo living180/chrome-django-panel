@@ -19,7 +19,6 @@ $(function() {
 
     function resizerDragMove(event) {
         resizeLeftPanel(event.pageX);
-        event.preventDefault();
     }
 
     function resizerDragEnd(event) {
