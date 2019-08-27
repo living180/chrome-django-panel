@@ -10,17 +10,18 @@ $(function() {
         localStorage = {};
     }
 
+    var requestList = document.getElementById('request-list');
     var debugToolbarPanel = document.getElementById('debug-toolbar-panel');
 
     function resizeLeftPanel(width) {
-        $('#request-list').width(width);
+        requestList.style.width = width;
         $('.split-view-resizer').css('left', width);
     }
 
     resizeLeftPanel(localStorage.sidePanelWidth || 200);
 
     function resizerDragMove(event) {
-        resizeLeftPanel(event.pageX);
+        resizeLeftPanel(event.pageX + 'px');
     }
 
     function resizerDragEnd(event) {
@@ -61,7 +62,7 @@ $(function() {
     chrome.devtools.network.onRequestFinished.addListener(function(entry) {
         for (const header of entry.response.headers) {
             if (header.name.toLowerCase() === 'x-debug-data-url') {
-                document.getElementById('request-list').appendChild(
+                requestList.appendChild(
                     buildRequestEl(entry.request.url, header.value)
                 );
                 break;
